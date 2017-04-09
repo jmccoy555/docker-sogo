@@ -2,7 +2,7 @@ FROM ubuntu:16.04
 
 MAINTAINER Julien Fastré <julienfastre@cvfe.be>
 
-ARG version=3.2.7
+ARG version=3.2.8
 
 WORKDIR /tmp/build
 
@@ -31,6 +31,18 @@ RUN echo "untar SOPE sources" \
       postgresql-server-dev-9.5 \
       libmemcached-dev \
       libcurl4-openssl-dev \
+      libmysqlclient-dev \
+      libexpat1 \
+      libexpat1-dev \
+      libexpat-dev \
+      libpopt-dev  \
+      libc6-dev  \
+      libwbxml2-0  \
+      wget \
+   && wget http://packages.inverse.ca/SOGo/nightly/3/ubuntu/pool/xenial/w/wbxml2/libwbxml2-0_0.11.2-1.1_amd64.deb  \
+   && wget http://packages.inverse.ca/SOGo/nightly/3/ubuntu/pool/xenial/w/wbxml2/libwbxml2-dev_0.11.2-1.1_amd64.deb  \
+   && dpkg -i libwbxml2-0*.deb  \
+   && dpkg -i libwbxml2-dev*.deb  \
    && echo "compiling sope & sogo" \
    && cd /tmp/SOPE  \
    && ./configure --with-gnustep --enable-debug --disable-strip  \
@@ -39,7 +51,9 @@ RUN echo "untar SOPE sources" \
    && cd /tmp/SOGo  \
    && ./configure --enable-debug --disable-strip  \
    && make  \
-   && make install \
+   && make install  \
+   && cd /tmp/SOGo/ActiveSync  \
+   && make install  \
    && echo "register sogo library" \
    && echo "/usr/local/lib/sogo" > /etc/ld.so.conf.d/sogo.conf  \
    && ldconfig \
@@ -48,7 +62,7 @@ RUN echo "untar SOPE sources" \
    && echo "create directories and enforce permissions" \
    && install -o sogo -g sogo -m 755 -d /var/run/sogo  \
    && install -o sogo -g sogo -m 750 -d /var/spool/sogo  \
-   && install -o sogo -g sogo -m 750 -d /var/log/sogo
+   && install -o sogo -g sogo -m 750 -d /var/log/sogo \
    
 # add sogo.conf
 ADD sogo.default.conf /etc/sogo/sogo.conf
