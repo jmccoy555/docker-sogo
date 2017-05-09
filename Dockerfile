@@ -38,8 +38,8 @@ RUN echo "untar SOPE sources" \
       libc6-dev  \
       libwbxml2-0  \
       wget \
-   && wget http://packages.inverse.ca/SOGo/nightly/3/ubuntu/pool/xenial/w/wbxml2/libwbxml2-0_0.11.2-1.1_amd64.deb  \
-   && wget http://packages.inverse.ca/SOGo/nightly/3/ubuntu/pool/xenial/w/wbxml2/libwbxml2-dev_0.11.2-1.1_amd64.deb  \
+   && wget http://packages.inverse.ca/SOGo/nightly/3/ubuntu/pool/xenial/w/wbxml2/libwbxml2-0_0.11.5-1_amd64.deb  \
+   && wget http://packages.inverse.ca/SOGo/nightly/3/ubuntu/pool/xenial/w/wbxml2/libwbxml2-dev_0.11.5-1_amd64.deb  \
    && dpkg -i libwbxml2-0*.deb  \
    && dpkg -i libwbxml2-dev*.deb  \
    && echo "compiling sope & sogo" \
@@ -61,7 +61,7 @@ RUN echo "untar SOPE sources" \
    && echo "create directories and enforce permissions" \
    && install -o sogo -g sogo -m 755 -d /var/run/sogo  \
    && install -o sogo -g sogo -m 750 -d /var/spool/sogo  \
-   && install -o sogo -g sogo -m 750 -d /var/log/sogo \
+   && install -o sogo -g sogo -m 750 -d /var/log/sogo
    
 # add sogo.conf
 ADD sogo.default.conf /etc/sogo/sogo.conf
