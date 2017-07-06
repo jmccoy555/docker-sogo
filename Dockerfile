@@ -1,6 +1,6 @@
 FROM ubuntu:16.04
 
-MAINTAINER Julien Fastré <julienfastre@cvfe.be>
+MAINTAINER James McCoy <james@mcy.email> based on the work by Julien Fastré <julienfastre@cvfe.be>
 
 ARG version=3.2.10
 
@@ -61,7 +61,8 @@ RUN echo "untar SOPE sources" \
    && echo "create directories and enforce permissions" \
    && install -o sogo -g sogo -m 755 -d /var/run/sogo  \
    && install -o sogo -g sogo -m 750 -d /var/spool/sogo  \
-   && install -o sogo -g sogo -m 750 -d /var/log/sogo
+   && install -o sogo -g sogo -m 750 -d /var/log/sogo \
+   && rm -fr /tmp/*
    
 # add sogo.conf
 ADD sogo.default.conf /etc/sogo/sogo.conf
