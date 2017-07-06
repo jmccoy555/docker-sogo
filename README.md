@@ -114,5 +114,5 @@ Sendmail is not installed in this image: sogo must be able to send mails using a
 
 ## Bug report
 
-Please reports bug on https://github.com/julienfastre/docker-sogo/issues
+Please reports bug on https://github.com/jmccoy555/docker-sogo/issues
 
