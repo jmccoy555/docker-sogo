@@ -1,3 +1,5 @@
+# This is the Version 3 branch..... Latest will from now on refere to Version 4!
+
 # What is SOGo ?
 
 SOGo (formerly named Scalable OpenGroupware.org) is an open source collaborative software (groupware) server with a focus on simplicity and scalability. It is developed in Objective-C using PostgreSQL, Apache, and IMAP.
