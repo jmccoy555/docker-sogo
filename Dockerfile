@@ -2,7 +2,7 @@ FROM ubuntu:16.04
 
 MAINTAINER James McCoy <james@mcy.email> based on the work by Julien Fastré <julienfastre@cvfe.be>
 
-ARG version=3.2.10
+ARG version=4.0.0
 
 WORKDIR /tmp/build
 
@@ -39,8 +39,8 @@ RUN echo "untar SOPE sources" \
       libwbxml2-0  \
       wget \
       tzdata \
-   && wget http://packages.inverse.ca/SOGo/nightly/3/ubuntu/pool/xenial/w/wbxml2/libwbxml2-0_0.11.5-1_amd64.deb  \
-   && wget http://packages.inverse.ca/SOGo/nightly/3/ubuntu/pool/xenial/w/wbxml2/libwbxml2-dev_0.11.5-1_amd64.deb  \
+   && wget http://packages.inverse.ca/SOGo/nightly/4/ubuntu/pool/xenial/w/wbxml2/libwbxml2-0_0.11.6-1_amd64.deb  \
+   && wget http://packages.inverse.ca/SOGo/nightly/4/ubuntu/pool/xenial/w/wbxml2/libwbxml2-dev_0.11.6-1_amd64.deb  \
    && dpkg -i libwbxml2-0*.deb  \
    && dpkg -i libwbxml2-dev*.deb  \
    && echo "compiling sope & sogo" \
