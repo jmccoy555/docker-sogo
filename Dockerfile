@@ -2,7 +2,7 @@ FROM ubuntu:16.04
 
 MAINTAINER James McCoy <james@mcy.email> based on the work by Julien Fastré <julienfastre@cvfe.be>
 
-ARG version=4.0.0
+ARG version=4.0.1
 
 WORKDIR /tmp/build
 
