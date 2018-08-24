@@ -121,3 +121,4 @@ Please reports bug on https://github.com/jmccoy555/docker-sogo/issues
 Changelog
 =========
 11/07/18 - Updated to v4.0.1
+24/08/18 - Updated to v4.0.2
