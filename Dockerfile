@@ -2,7 +2,7 @@ FROM debian:stretch-slim
 
 MAINTAINER James McCoy <james@mcy.email> based on the work by Julien Fastré <julienfastre@cvfe.be>
 
-ARG version=4.0.7
+ARG version=4.0.2
 
 WORKDIR /tmp/build
 

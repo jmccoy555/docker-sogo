@@ -122,4 +122,3 @@ Changelog
 =========
 11/07/18 - Updated to v4.0.1
 24/08/18 - Updated to v4.0.2
-04/04/19 - Updated to v4.0.7
