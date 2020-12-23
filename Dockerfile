@@ -1,15 +1,13 @@
-FROM ubuntu:16.04
+FROM debian:buster-slim
 
-MAINTAINER James McCoy <james@mcy.email> based on the work by Julien Fastré <julienfastre@cvfe.be>
-
-ARG version=4.0.7
+ARG version=5.0.1
 
 WORKDIR /tmp/build
 
 # download SOPE sources
 ADD https://github.com/inverse-inc/sope/archive/SOPE-${version}.tar.gz /tmp/src/sope/sope.tar.gz
 
-# download sogo sources
+# download SOGo sources
 ADD https://github.com/inverse-inc/sogo/archive/SOGo-${version}.tar.gz /tmp/src/SOGo/SOGo.tar.gz
 
 # prepare & compile
@@ -30,27 +28,32 @@ RUN echo "untar SOPE sources" \
       libldap2-dev \
       libmemcached-dev \
       libcurl4-openssl-dev \
-      libmysqlclient-dev \
+      default-libmysqlclient-dev \
       libexpat1 \
       libexpat1-dev \
       libexpat-dev \
       libpopt-dev  \
       libc6-dev  \
       libwbxml2-0  \
+      libsodium-dev \
+      libzip-dev \
+      liboath-dev \
       wget \
       tzdata \
-   && wget http://packages.inverse.ca/SOGo/nightly/4/ubuntu/pool/xenial/w/wbxml2/libwbxml2-0_0.11.6-1_amd64.deb  \
-   && wget http://packages.inverse.ca/SOGo/nightly/4/ubuntu/pool/xenial/w/wbxml2/libwbxml2-dev_0.11.6-1_amd64.deb  \
+   && wget https://packages.inverse.ca/SOGo/nightly/5/debian/pool/buster/w/wbxml2/libwbxml2-0_0.11.6-1_amd64.deb  \
+   && wget https://packages.inverse.ca/SOGo/nightly/5/debian/pool/buster/w/wbxml2/libwbxml2-dev_0.11.6-1_amd64.deb  \
    && dpkg -i libwbxml2-0*.deb  \
    && dpkg -i libwbxml2-dev*.deb  \
-   && echo "compiling sope & sogo" \
+   && echo "compiling SOPE" \
    && cd /tmp/SOPE  \
    && ./configure --with-gnustep --enable-debug --disable-strip  \
    && make  \
    && make install  \
+   && echo "compiling SOGo" \
    && cd /tmp/SOGo  \
-   && ./configure --enable-debug --disable-strip  \
+   && ./configure --enable-debug --disable-strip --enable-mfa  \
    && make  \
+   && echo "compiling ActiveSync" \
    && make install  \
    && cd /tmp/SOGo/ActiveSync  \
    && make install  \
@@ -78,4 +81,3 @@ USER sogo
 RUN . /usr/share/GNUstep/Makefiles/GNUstep.sh
 
 CMD [ "sogod", "-WONoDetach", "YES", "-WOPort", "20000", "-WOLogFile", "-", "-WOPidFile", "/tmp/sogo.pid"]
-
